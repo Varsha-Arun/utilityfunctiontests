@@ -4,6 +4,13 @@ resources:
     configuration:
       gitProvider: s_gitHub
       path: vijayreddy1991/utilityfunctiontests     
+  
+  - name: image_pipe
+    type: Image
+    configuration:
+      registry: varsha_docker
+      imageName: shippabledocker/jfreq
+      imageTag: master
       
 pipelines:
   - name: utilityfuctiontest1
@@ -15,7 +22,8 @@ pipelines:
             - name: s_gitHub
           inputResources:
             - name: repo_pipe
-            
+          outputResources:
+            - name: image_pipe  
         execution:
           onExecute: 
             - printenv
@@ -35,8 +43,6 @@ pipelines:
             - echo "Hello pipelines team" >> test.txt
             - compare_git --resource repo_pipe --commit-range HEAD~3..HEAD pipelines.yml
             - read_json package.json "DOCKER_USERNAME"
-#             - write_output repo_pipe1 "imageTag=master" "sha=$commitSha" 
-#             - save_tests test.sh 
             - add_cache_files $PWD/file.txt jfrog_pipe 
             - add_run_variables imageTag="master"
             - export_run_variables 
@@ -63,6 +69,8 @@ pipelines:
             - decrypt_file encrypted.txt --output decrypted.txt --key key.pem
             - cat decrypted.txt            
             - popd
+            - write_output image_pipe "imageTag=latest"
+            - send_notification varsha_slack
 
       - name: utilityFunction2
         type: Bash
