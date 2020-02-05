@@ -19,7 +19,8 @@ pipelines:
         type: Bash
         configuration:
           integrations:
-            - name: s_gitHub
+            - name: varsha_github
+            - name: varsha_slack
           inputResources:
             - name: repo_pipe
           outputResources:
