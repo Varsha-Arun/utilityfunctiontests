@@ -2,7 +2,7 @@ resources:
   - name: repo_pipe
     type: GitRepo
     configuration:
-      gitProvider: s_gitHub
+      gitProvider: varsha_gitHub
       path: Varsha-Arun/utilityfunctiontests     
   
   - name: image_pipe
