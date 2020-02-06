@@ -49,7 +49,7 @@ pipelines:
             - export_run_variables 
             - export_pipeline_variables 
             - add_run_files $PWD/test.txt jfrog
-            - add_pipeline_variables scm=$int_s_gitHub_masterName
+            - add_pipeline_variables scm=$int_varsha_github_masterName
             - add_pipeline_files $PWD/file.txt jfrog_pipeline
             - find_resource_variable repo_pipe resourcePath
             - restore_cache_files jfrog_pipe $PWD/file.txt
@@ -77,7 +77,7 @@ pipelines:
         type: Bash
         configuration:
           integrations:
-            - name: s_gitHub
+            - name: varsha_github
           inputSteps:
             - name: utilityFunction
           inputResources:
@@ -96,7 +96,7 @@ pipelines:
         type: Bash
         configuration:
           integrations:
-            - name: s_gitHub
+            - name: varsha_github
           inputResources:
             - name: repo_pipe
           inputSteps:
